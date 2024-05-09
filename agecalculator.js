@@ -70,12 +70,8 @@ function ageCalculate() {
     op1.style.opacity = "1";
     }
   } 
-  // else if (myBirth < today_date) {
-  //   alert("congratultions");
-  // }
   else if (myBirth >= today) {
     alert("Please Enter your Valid Birthdate.");
-    // console.error(date,'Please Enter Valid Birthday.');
   }
   else {
     alert("Please Enter your Valid Birthdate.");
