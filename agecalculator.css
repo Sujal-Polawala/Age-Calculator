@@ -13,12 +13,6 @@ body {
   height: 100%;
 }
 
-/* body {
-  
-  background-image: url(https://www.teahub.io/photos/full/8-80224_blur-image-for-youtube.jpg);
-  background-size: cover;
-} */
-
 .container {
   padding-top: 1px;
 }
@@ -170,9 +164,3 @@ body {
   margin: 10px;
   margin-right: 15px;
 }
-
-/* #month {
-}
-
-#day {
-} */
