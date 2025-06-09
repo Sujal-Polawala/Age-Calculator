@@ -32,11 +32,9 @@ A simple and responsive web app to calculate your exact age in years, months, an
 
 No frameworks, build tools, or installations needed — just pure front-end!
 
-📁 Folder Structure
-plaintext
-Copy
-Edit
-/Age-Calculator
-├── index.html
-├── style.css
+## 📁 Folder Structure
+```plaintext
+/Age-Calculator  
+├── index.html  
+├── style.css  
 └── script.js
