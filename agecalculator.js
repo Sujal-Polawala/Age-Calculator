@@ -13,10 +13,18 @@ let currentDate = new Date().getDate();
 if (currentDate < 10) {
   currentDate = "0" + currentDate;
 }
-
+// Set max attribute for DOB input to today
+const dobInput = document.getElementById("date");
+const today = new Date();
+let yyyy = today.getFullYear();
+let mm = String(today.getMonth() + 1).padStart(2, '0');
+let dd = String(today.getDate()).padStart(2, '0');
+const maxDate = `${yyyy}-${mm}-${dd}`;
+dobInput.setAttribute("max", maxDate);
 if (currentMonth < 10) {
   currentMonth = "0" + currentMonth;
 }
+
 document.getElementById("today_date").value =
   currentYear + "-" + currentMonth + "-" + currentDate;
 function ageCalculate() {
