@@ -5,39 +5,136 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Age Calculator</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="agecalculator.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="main_div_container">
-            <div class="main_screen_container">
-                <h3 class="hading_container">Age calculator</h3>
-                <div class="user_input_container">
-                    <div class="dob_tile">Select DOB</div>
-                    <input id="date" type="date" name="dob">
-                </div>
-                <div class="user_input_container">
-                    <div class="date_tile">Today Date</div>
-                    <input id="today_date" type="date" name="dob" disabled>
-                </div>
-                <button class="btn" onclick="ageCalculate()">Calculate</button>
-                <div class="age_main_big_container">
-                    <div class="left_side_div_age_list">
-                        <div>Age</div>
-                        <div><b id="year">_</b> Year</div>
-                        <div id="m_d"><b id="month">_</b> Months | <b id="day">_</b> Days</div>
+    <div class="bg-shapes" aria-hidden="true">
+        <span class="shape shape-1"></span>
+        <span class="shape shape-2"></span>
+        <span class="shape shape-3"></span>
+    </div>
+
+    <main class="app">
+        <article class="card">
+            <div class="loader-overlay" id="loader" aria-hidden="true">
+                <div class="loader-panel">
+                    <div class="loader-orbit" aria-hidden="true">
+                        <span class="orbit-dot orbit-dot-1"></span>
+                        <span class="orbit-dot orbit-dot-2"></span>
+                        <span class="orbit-dot orbit-dot-3"></span>
                     </div>
-                    <div class="right_side_div_age_list">
-                        <div>Next Brithday</div>
-                        <img src="https://i.pinimg.com/originals/ce/e2/85/cee2854c1ca3a12fe2655f3376b5c110.gif">
-                        <div id="n_b"><b id="month1">__</b> Months | <b id="day1">__</b> Days</div>
-                    </div>
+                    <p class="loader-text">
+                        Calculating
+                        <span class="loader-dots" aria-hidden="true">
+                            <span>.</span><span>.</span><span>.</span>
+                        </span>
+                    </p>
                 </div>
             </div>
-        </div>
-    </div>
+
+            <header class="card-header">
+                <div class="logo" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                        <circle cx="12" cy="12" r="9"/>
+                        <path d="M12 7v5l3 2"/>
+                    </svg>
+                </div>
+                <h1>Age Calculator</h1>
+                <p class="subtitle">Discover your exact age and countdown to your next birthday</p>
+            </header>
+
+            <section class="inputs">
+                <div class="field">
+                    <span class="field-label">Date of birth</span>
+                    <div class="date-select-group">
+                        <div class="date-select-wrap">
+                            <select id="dob-day" class="date-select" aria-label="Birth day">
+                                <option value="" disabled selected>Day</option>
+                            </select>
+                            <svg class="select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M6 9l6 6 6-6"/>
+                            </svg>
+                        </div>
+                        <div class="date-select-wrap">
+                            <select id="dob-month" class="date-select" aria-label="Birth month">
+                                <option value="" disabled selected>Month</option>
+                            </select>
+                            <svg class="select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M6 9l6 6 6-6"/>
+                            </svg>
+                        </div>
+                        <div class="date-select-wrap">
+                            <select id="dob-year" class="date-select" aria-label="Birth year">
+                                <option value="" disabled selected>Year</option>
+                            </select>
+                            <svg class="select-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M6 9l6 6 6-6"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <span class="field-label">Today's date</span>
+                    <div class="date-display">
+                        <svg class="date-display-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
+                            <rect x="3" y="4" width="18" height="18" rx="2"/>
+                            <path d="M16 2v4M8 2v4M3 10h18"/>
+                        </svg>
+                        <span id="today_display"></span>
+                        <input type="hidden" id="today_date" name="today">
+                    </div>
+                </div>
+
+                <button class="btn-calculate" id="calc-btn" type="button">
+                    <span class="btn-label">Calculate Age</span>
+                    <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6"/>
+                    </svg>
+                </button>
+            </section>
+
+            <section class="results" aria-live="polite">
+                <div class="result-card result-age">
+                    <span class="result-label">Your Age</span>
+                    <div class="age-hero">
+                        <span class="age-number" id="year">—</span>
+                        <span class="age-unit">years</span>
+                    </div>
+                    <p class="age-detail" id="m_d">
+                        <span><strong id="month">—</strong> months</span>
+                        <span class="divider">·</span>
+                        <span><strong id="day">—</strong> days</span>
+                    </p>
+                </div>
+
+                <div class="result-card result-birthday">
+                    <span class="result-label">Next Birthday</span>
+                    <div class="birthday-icon" aria-hidden="true">
+                        <svg viewBox="0 0 64 64" fill="none">
+                            <rect x="10" y="28" width="44" height="24" rx="4" fill="#fbbf24"/>
+                            <rect x="10" y="24" width="44" height="8" rx="2" fill="#f59e0b"/>
+                            <line x1="32" y1="12" x2="32" y2="24" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+                            <circle cx="32" cy="10" r="4" fill="#f97316"/>
+                            <circle cx="32" cy="10" r="2" fill="#fef3c7"/>
+                        </svg>
+                    </div>
+                    <p class="birthday-detail" id="n_b">
+                        <span><strong id="month1">—</strong> months</span>
+                        <span class="divider">·</span>
+                        <span><strong id="day1">—</strong> days</span>
+                    </p>
+                </div>
+            </section>
+        </article>
+    </main>
+
+    <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
     <script type="text/javascript" src="agecalculator.js"></script>
 </body>
 
